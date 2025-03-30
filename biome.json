@@ -20,6 +20,9 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"correctness": {
+				"noChildrenProp": "off"
+			},
 			"recommended": true
 		}
 	},
