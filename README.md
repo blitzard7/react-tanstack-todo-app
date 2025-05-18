@@ -18,7 +18,7 @@ Here's what this project is using:
 1. **Clone the repo**:
    ```bash
    git clone https://github.com/blitzard7/react-tanstack-todo-app.git
-   cd todo-demo
+   cd react-tanstack-todo-app
    ```
 2. **Install dependencies**:
    ```bash
