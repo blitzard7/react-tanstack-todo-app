@@ -58,7 +58,6 @@ function CreateNewTodo() {
       <Header />
       <form
         onSubmit={handleSubmit((data: FieldValues) => {
-          console.log(data);
           const newTodo: Todo = {
             id: 1,
             title: data.title,
