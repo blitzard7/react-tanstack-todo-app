@@ -1,0 +1,19 @@
+{
+  "title": "Todo App",
+  "subheader": "Meine Todos",
+  "add": "Hinzufügen",
+  "cancel": "Abbrechen",
+  "todoNameLabel": "Todo Name",
+  "todoNamePlaceholder": "Gib einen Todo Namen ein",
+  "todoDescriptionLabel": "Beschreibung",
+  "todoDescriptionPlaceholder": "Gib dem Todo eine Beschreibung",
+  "todoDeadlineLabel": "Deadline",
+  "todoPriorityLabel": "Priorität",
+  "priorityLow": "Gering",
+  "priorityMedium": "Mittel",
+  "priorityHigh": "Hoch",
+  "completedBadge": "abgeschlossen",
+  "pendingBadge": "ausstehend",
+  "searchPlaceholder": "tippen, um todos zu suchen ...",
+  "createNewTodo": "Neues Todo erstellen"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Todo App",
+  "subheader": "My Todos",
+  "add": "Add",
+  "cancel": "Cancel",
+  "todoNameLabel": "Todo name",
+  "todoNamePlaceholder": "Enter todo name",
+  "todoDescriptionLabel": "Description",
+  "todoDescriptionPlaceholder": "Enter todo description",
+  "todoDeadlineLabel": "Deadline",
+  "todoPriorityLabel": "Priority",
+  "priorityLow": "Low",
+  "priorityMedium": "Medium",
+  "priorityHigh": "High",
+  "completedBadge": "completed",
+  "pendingBadge": "pending",
+  "searchPlaceholder": "type to search todos ...",
+  "createNewTodo": "Create new todo"
+}
