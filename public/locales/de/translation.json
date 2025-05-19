@@ -3,6 +3,7 @@
   "subheader": "Meine Todos",
   "add": "Hinzufügen",
   "cancel": "Abbrechen",
+  "delete": "Löschen",
   "todoNameLabel": "Todo Name",
   "todoNamePlaceholder": "Gib einen Todo Namen ein",
   "todoDescriptionLabel": "Beschreibung",

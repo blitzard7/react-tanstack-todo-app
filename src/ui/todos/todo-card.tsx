@@ -1,6 +1,7 @@
 import { type Todo } from '@/store/todo-store';
 import { Badge } from '../badge';
 import { ClockIcon, PriorityIcon } from '../icons';
+import { useTranslation } from 'react-i18next';
 
 interface TodoCardProp {
   todo: Todo;
@@ -8,6 +9,7 @@ interface TodoCardProp {
 }
 
 function TodoCard({ todo, onDelete }: TodoCardProp) {
+  const { t } = useTranslation();
   const colorClasses = {
     high: 'bg-red-100 text-red-800',
     medium: 'bg-yellow-100 text-yellow-800',
@@ -38,7 +40,7 @@ function TodoCard({ todo, onDelete }: TodoCardProp) {
               clipRule="evenodd"
             />
           </svg>
-          <span>Delete</span>
+          <span>{t('delete')}</span>
         </div>
       </div>
 
