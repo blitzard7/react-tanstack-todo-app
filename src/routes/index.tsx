@@ -19,6 +19,8 @@ export const Route = createFileRoute('/')({
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const todos = useTodoStore((state) => state.todos);
+  const deleteTodos = useTodoStore((state) => state.delete);
+
   const { t } = useTranslation();
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +80,7 @@ function App() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-8"
         >
           {filteredTodos.map((todo, i) => {
-            return <TodoCard key={i} todo={todo} />;
+            return <TodoCard key={i} todo={todo} onDelete={deleteTodos} />;
           })}
         </div>
       </div>

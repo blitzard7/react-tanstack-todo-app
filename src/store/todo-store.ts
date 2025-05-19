@@ -14,6 +14,7 @@ type TodoState = {
 
 type TodoAction = {
   add: (todo: Omit<Todo, 'id'>) => void;
+  delete: (id: string) => void;
 };
 
 const useTodoStore = create<TodoState & TodoAction>((set) => ({
@@ -27,6 +28,10 @@ const useTodoStore = create<TodoState & TodoAction>((set) => ({
           id: crypto.randomUUID(),
         },
       ],
+    })),
+  delete: (id: string) =>
+    set((state: TodoState) => ({
+      todos: state.todos.filter((todo) => todo.id !== id),
     })),
 }));
 

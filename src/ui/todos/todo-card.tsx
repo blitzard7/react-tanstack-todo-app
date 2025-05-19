@@ -4,9 +4,10 @@ import { ClockIcon, PriorityIcon } from '../icons';
 
 interface TodoCardProp {
   todo: Todo;
+  onDelete: (id: string) => void;
 }
 
-function TodoCard({ todo }: TodoCardProp) {
+function TodoCard({ todo, onDelete }: TodoCardProp) {
   const colorClasses = {
     high: 'bg-red-100 text-red-800',
     medium: 'bg-yellow-100 text-yellow-800',
@@ -20,6 +21,7 @@ function TodoCard({ todo }: TodoCardProp) {
           <PriorityIcon priority={todo.priority} />
           <span className="ml-1 capitalize">{todo.priority}</span>
         </Badge>
+        <span onClick={() => onDelete(todo.id)}>x</span>
       </div>
 
       <p className="text-gray-600 mb-4 line-clamp-2">{todo.description}</p>
