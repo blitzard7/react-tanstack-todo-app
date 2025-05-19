@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 type Todo = {
-  id: number;
+  id: string;
   title: string;
   description?: string;
   deadline?: Date;
@@ -13,13 +13,21 @@ type TodoState = {
 };
 
 type TodoAction = {
-  add: (todo: Todo) => void;
+  add: (todo: Omit<Todo, 'id'>) => void;
 };
 
 const useTodoStore = create<TodoState & TodoAction>((set) => ({
   todos: [],
-  add: (todo: Todo) =>
-    set((state: TodoState) => ({ todos: [...state.todos, todo] })),
+  add: (todo: Omit<Todo, 'id'>) =>
+    set((state: TodoState) => ({
+      todos: [
+        ...state.todos,
+        {
+          ...todo,
+          id: crypto.randomUUID(),
+        },
+      ],
+    })),
 }));
 
 export { useTodoStore, type Todo };

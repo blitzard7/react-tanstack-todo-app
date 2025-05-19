@@ -1,4 +1,4 @@
-import { useTodoStore, type Todo } from '@/store/todo-store';
+import { useTodoStore } from '@/store/todo-store';
 import { ButtonLink, Header } from '@/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute } from '@tanstack/react-router';
@@ -58,15 +58,12 @@ function CreateNewTodo() {
       <Header />
       <form
         onSubmit={handleSubmit((data: FieldValues) => {
-          const newTodo: Todo = {
-            id: 1,
+          addTodos({
             title: data.title,
             description: data.description,
             deadline: data.deadline,
             priority: data.priority,
-          };
-
-          addTodos(newTodo);
+          });
           reset();
           navigate({ to: '/' });
         })}

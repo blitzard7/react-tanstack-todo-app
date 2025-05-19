@@ -1,4 +1,4 @@
-import type { Todo } from '@/store/todo-store';
+import { type Todo } from '@/store/todo-store';
 import { Badge } from '../badge';
 import { ClockIcon, PriorityIcon } from '../icons';
 
