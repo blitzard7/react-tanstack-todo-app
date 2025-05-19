@@ -9,7 +9,7 @@ import {
   TodoCard,
 } from '@/ui';
 import { createFileRoute } from '@tanstack/react-router';
-import { useState, type ChangeEvent } from 'react';
+import { useMemo, useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/')({
@@ -27,15 +27,14 @@ function App() {
     setSearchQuery(e.target.value);
   };
 
-  const filteredTodos = todos.filter(
-    (todo) =>
-      todo.title
-        .toLocaleLowerCase()
-        .includes(searchQuery.toLocaleLowerCase()) ||
-      todo.description
-        ?.toLocaleLowerCase()
-        .includes(searchQuery.toLocaleLowerCase()),
-  );
+  const lowerSearchQuery = searchQuery.toLowerCase();
+  const filteredTodos = useMemo(() => {
+    return todos.filter(
+      (todo) =>
+        todo.title.toLowerCase().includes(lowerSearchQuery) ||
+        todo.description?.toLowerCase().includes(lowerSearchQuery),
+    );
+  }, [todos, lowerSearchQuery]);
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16 space-y-8">
@@ -79,8 +78,10 @@ function App() {
           data-testid="todos"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-8"
         >
-          {filteredTodos.map((todo, i) => {
-            return <TodoCard key={i} todo={todo} onDelete={deleteTodos} />;
+          {filteredTodos.map((todo) => {
+            return (
+              <TodoCard key={todo.id} todo={todo} onDelete={deleteTodos} />
+            );
           })}
         </div>
       </div>
