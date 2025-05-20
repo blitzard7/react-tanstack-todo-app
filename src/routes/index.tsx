@@ -64,11 +64,11 @@ function App() {
             />
           </div>
           <div className="flex items-center gap-2 ml-auto">
-            <Badge className="space-x-1.5 bg-gray-100 border-gray-500">
+            <Badge className="space-x-1.5 bg-gray-100 border-gray-500 hover:cursor-pointer">
               <CheckIcon className="text-green-500" />
               <p>{t('completedBadge')}</p>
             </Badge>
-            <Badge className="space-x-1.5 bg-gray-100 border-gray-500">
+            <Badge className="space-x-1.5 bg-gray-100 border-gray-500 hover:cursor-pointer">
               <ClockIcon className="text-amber-500" />
               <p>{t('pendingBadge')}</p>
             </Badge>
