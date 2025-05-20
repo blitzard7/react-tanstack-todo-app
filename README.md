@@ -10,6 +10,7 @@ This project uses the following tools and libraries:
 - 🧭 [TanStack Router](https://tanstack.com/router/latest) – for routing
 - 🧠 [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) – for state management
 - 🎨 [TailwindCSS](https://tailwindcss.com/) – for utility-first styling
+- 🧩 [shadcn/ui](https://ui.shadcn.com/) – for accessible, styled components
 - 🧾 [React Hook Form](https://react-hook-form.com/) – for form handling
 - 🧬 [Zod](https://zod.dev/) – for schema validation
 
