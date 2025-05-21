@@ -5,6 +5,7 @@
   "cancel": "Cancel",
   "delete": "Delete",
   "edit": "Edit",
+  "done": "Done",
   "todoNameLabel": "Todo name",
   "todoNamePlaceholder": "Enter todo name",
   "todoDescriptionLabel": "Description",

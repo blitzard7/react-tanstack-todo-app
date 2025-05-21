@@ -5,6 +5,7 @@
   "cancel": "Abbrechen",
   "delete": "Löschen",
   "edit": "Bearbeiten",
+  "done": "Fertig",
   "todoNameLabel": "Todo Name",
   "todoNamePlaceholder": "Gib einen Todo Namen ein",
   "todoDescriptionLabel": "Beschreibung",

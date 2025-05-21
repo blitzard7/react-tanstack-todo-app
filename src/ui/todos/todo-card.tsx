@@ -1,6 +1,5 @@
 import { type Todo } from '@/store/todo-store';
 import { Badge } from '../badge';
-import { ClockIcon, PriorityIcon } from '../icons';
 import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
@@ -8,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { CheckIcon, ClockIcon, PriorityIcon } from '../icons';
 
 interface TodoCardProp {
   todo: Todo;
@@ -39,6 +39,10 @@ function TodoCard({ todo, onDelete }: TodoCardProp) {
               </svg>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
+              <DropdownMenuItem>
+                <CheckIcon className="h-4 w-4 mr-2" />
+                <span>{t('done')}</span>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
