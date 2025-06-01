@@ -12,9 +12,10 @@ import { CheckIcon, ClockIcon, PriorityIcon } from '../icons';
 interface TodoCardProp {
   todo: Todo;
   onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
 }
 
-function TodoCard({ todo, onDelete }: TodoCardProp) {
+function TodoCard({ todo, onDelete, onEdit }: TodoCardProp) {
   const { t } = useTranslation();
   const colorClasses = {
     high: 'bg-red-100 text-red-800',
@@ -43,7 +44,7 @@ function TodoCard({ todo, onDelete }: TodoCardProp) {
                 <CheckIcon className="h-4 w-4 mr-2" />
                 <span>{t('done')}</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onEdit(todo.id)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4 mr-2"

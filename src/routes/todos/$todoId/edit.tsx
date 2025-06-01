@@ -1,51 +1,59 @@
 import { todoSchema } from '@/lib/todo.schema';
 import { useTodoStore } from '@/store/todo-store';
-import { ButtonLink, Header } from '@/ui';
+import { Header, ButtonLink } from '@/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect } from 'react';
+import { createFileRoute, notFound } from '@tanstack/react-router';
 import { useForm, type FieldValues } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { todoStore } from '@/store/todo-store';
 
-export const Route = createFileRoute('/todos/new')({
-  component: CreateNewTodo,
+export const Route = createFileRoute('/todos/$todoId/edit')({
+  component: EditTodo,
+  beforeLoad: async ({ params }) => {
+    const todos = todoStore.getState().todos;
+    if (!todos.find((todo) => todo.id === params.todoId)) {
+      throw notFound();
+    }
+  },
+  notFoundComponent: () => {
+    return <p>not found</p>;
+  },
 });
 
-function CreateNewTodo() {
+function EditTodo() {
   const navigate = Route.useNavigate();
-
   const { t } = useTranslation();
+  const todos = useTodoStore((state) => state.todos);
+
+  const updateTodos = useTodoStore((state) => state.update);
+  const params = Route.useParams();
+  const toEditTodo = todos.find((todo) => todo.id === params.todoId);
+
   const {
     register,
-    handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    handleSubmit,
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(todoSchema),
     defaultValues: {
-      title: '',
-      description: '',
-      deadline: new Date(),
-      priority: 'low',
+      title: toEditTodo?.title,
+      description: toEditTodo?.description,
+      deadline: toEditTodo?.deadline,
+      priority: toEditTodo?.priority,
     },
   });
-
-  const addTodos = useTodoStore((state) => state.add);
-
-  useEffect(() => {
-    reset();
-  }, [isSubmitSuccessful]);
 
   return (
     <div className="flex flex-col justify-center items-center pt-16">
       <Header />
       <form
         onSubmit={handleSubmit((data: FieldValues) => {
-          addTodos({
-            title: data.title,
-            description: data.description,
-            deadline: data.deadline,
+          updateTodos(params.todoId, {
             priority: data.priority,
+            title: data.title,
+            deadline: data.deadline,
+            description: data.description,
           });
           reset();
           navigate({ to: '/' });

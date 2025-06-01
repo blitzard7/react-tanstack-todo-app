@@ -18,5 +18,6 @@
   "completedBadge": "abgeschlossen",
   "pendingBadge": "ausstehend",
   "searchPlaceholder": "tippen, um todos zu suchen ...",
-  "createNewTodo": "Neues Todo erstellen"
+  "createNewTodo": "Neues Todo erstellen",
+  "noTodosFound": "Es gibt keine Todos"
 }

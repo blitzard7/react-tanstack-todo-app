@@ -4,6 +4,7 @@ import {
   ButtonLink,
   CheckIcon,
   ClockIcon,
+  EmptyTodoList,
   Header,
   SearchBar,
   TodoCard,
@@ -17,6 +18,7 @@ export const Route = createFileRoute('/')({
 });
 
 function App() {
+  const navigate = Route.useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const todos = useTodoStore((state) => state.todos);
   const deleteTodos = useTodoStore((state) => state.delete);
@@ -27,6 +29,10 @@ function App() {
     setSearchQuery(e.target.value);
   };
 
+  const onEdit = (todoId: string) => {
+    navigate({ to: '/todos/$todoId/edit', params: { todoId } });
+  };
+
   const lowerSearchQuery = searchQuery.toLowerCase();
   const filteredTodos = useMemo(() => {
     return todos.filter(
@@ -35,6 +41,17 @@ function App() {
         todo.description?.toLowerCase().includes(lowerSearchQuery),
     );
   }, [todos, lowerSearchQuery]);
+
+  const todoCards = filteredTodos.map((todo) => {
+    return (
+      <TodoCard
+        key={todo.id}
+        todo={todo}
+        onDelete={deleteTodos}
+        onEdit={onEdit}
+      />
+    );
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16 space-y-8">
@@ -74,16 +91,16 @@ function App() {
             </Badge>
           </div>
         </div>
-        <div
-          data-testid="todos"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-8"
-        >
-          {filteredTodos.map((todo) => {
-            return (
-              <TodoCard key={todo.id} todo={todo} onDelete={deleteTodos} />
-            );
-          })}
-        </div>
+        {filteredTodos.length === 0 ? (
+          <EmptyTodoList />
+        ) : (
+          <div
+            data-testid="todos"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-8"
+          >
+            {todoCards}
+          </div>
+        )}
       </div>
     </div>
   );
