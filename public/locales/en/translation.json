@@ -20,5 +20,7 @@
   "searchPlaceholder": "type to search todos ...",
   "createNewTodo": "Create new todo",
   "noTodosFound": "There are no todos",
-  "goBackHome": "Go Home"
+  "goBackHome": "Go Home",
+  "pageNotFoundTitle": "Page Not Found",
+  "pageNotFoundSubtitle": "Sorry, we couldn't find the page you're looking for."
 }
