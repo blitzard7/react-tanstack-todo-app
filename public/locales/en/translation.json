@@ -19,5 +19,6 @@
   "pendingBadge": "pending",
   "searchPlaceholder": "type to search todos ...",
   "createNewTodo": "Create new todo",
-  "noTodosFound": "There are no todos"
+  "noTodosFound": "There are no todos",
+  "goBackHome": "Go Home"
 }

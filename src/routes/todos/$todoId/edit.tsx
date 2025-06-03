@@ -15,9 +15,6 @@ export const Route = createFileRoute('/todos/$todoId/edit')({
       throw notFound();
     }
   },
-  notFoundComponent: () => {
-    return <p>not found</p>;
-  },
 });
 
 function EditTodo() {

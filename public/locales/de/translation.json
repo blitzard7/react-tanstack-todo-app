@@ -19,5 +19,6 @@
   "pendingBadge": "ausstehend",
   "searchPlaceholder": "tippen, um todos zu suchen ...",
   "createNewTodo": "Neues Todo erstellen",
-  "noTodosFound": "Es gibt keine Todos"
+  "noTodosFound": "Es gibt keine Todos",
+  "goBackHome": "Zur Startseite"
 }
