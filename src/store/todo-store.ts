@@ -3,9 +3,10 @@ import { create } from 'zustand';
 type Todo = {
   id: string;
   title: string;
+  priority: 'high' | 'medium' | 'low';
+  completed: boolean;
   description?: string;
   deadline?: Date;
-  priority: 'high' | 'medium' | 'low';
 };
 
 type TodoState = {

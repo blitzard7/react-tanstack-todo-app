@@ -46,6 +46,7 @@ function CreateNewTodo() {
             description: data.description,
             deadline: data.deadline,
             priority: data.priority,
+            completed: false,
           });
           reset();
           navigate({ to: '/' });

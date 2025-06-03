@@ -1,14 +1,6 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTodoStore } from '@/store/todo-store';
-import {
-  Badge,
-  ButtonLink,
-  CheckIcon,
-  ClockIcon,
-  EmptyTodoList,
-  Header,
-  SearchBar,
-  TodoCard,
-} from '@/ui';
+import { ButtonLink, Header, SearchBar, TodoList } from '@/ui';
 import { createFileRoute } from '@tanstack/react-router';
 import { useMemo, useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -42,17 +34,6 @@ function App() {
     );
   }, [todos, lowerSearchQuery]);
 
-  const todoCards = filteredTodos.map((todo) => {
-    return (
-      <TodoCard
-        key={todo.id}
-        todo={todo}
-        onDelete={deleteTodos}
-        onEdit={onEdit}
-      />
-    );
-  });
-
   return (
     <div className="min-h-screen bg-gray-50 pt-16 space-y-8">
       <div className="container mx-auto px-4 py-8">
@@ -80,27 +61,45 @@ function App() {
               onChange={onSearchChange}
             />
           </div>
-          <div className="flex items-center gap-2 ml-auto">
-            <Badge className="space-x-1.5 bg-gray-100 border-gray-500 hover:cursor-pointer">
-              <CheckIcon className="text-green-500" />
-              <p>{t('completedBadge')}</p>
-            </Badge>
-            <Badge className="space-x-1.5 bg-gray-100 border-gray-500 hover:cursor-pointer">
-              <ClockIcon className="text-amber-500" />
-              <p>{t('pendingBadge')}</p>
-            </Badge>
-          </div>
         </div>
-        {filteredTodos.length === 0 ? (
-          <EmptyTodoList />
-        ) : (
-          <div
-            data-testid="todos"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-8"
-          >
-            {todoCards}
-          </div>
-        )}
+        <Tabs defaultValue="all" className="mt-4">
+          <TabsList className="grid grid-cols-3 w-full max-w-md">
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger
+              value="active"
+              onClick={() => filteredTodos.filter((todo) => !todo.completed)}
+            >
+              Active
+            </TabsTrigger>
+            <TabsTrigger
+              value="completed"
+              onClick={() => filteredTodos.filter((todo) => todo.completed)}
+            >
+              Completed
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="all">
+            <TodoList
+              todos={filteredTodos}
+              onDelete={deleteTodos}
+              onEdit={onEdit}
+            />
+          </TabsContent>
+          <TabsContent value="active">
+            <TodoList
+              todos={filteredTodos.filter((todo) => !todo.completed)}
+              onDelete={deleteTodos}
+              onEdit={onEdit}
+            />
+          </TabsContent>
+          <TabsContent value="completed">
+            <TodoList
+              todos={filteredTodos.filter((todo) => todo.completed)}
+              onDelete={deleteTodos}
+              onEdit={onEdit}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
