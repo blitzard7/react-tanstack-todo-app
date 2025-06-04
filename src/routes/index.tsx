@@ -29,6 +29,10 @@ function App() {
   );
 
   const lowerSearchQuery = searchQuery.toLowerCase();
+  const isTodoListEmpty = useMemo(() => {
+    return todos.length === 0;
+  }, [todos]);
+
   const filteredTodos = useMemo(() => {
     const matchingTodos = todos.filter(
       (todo) =>
@@ -68,13 +72,25 @@ function App() {
         </div>
         <Tabs defaultValue="all" className="mt-4">
           <TabsList className="grid grid-cols-3 w-full max-w-md">
-            <TabsTrigger value="all" onClick={() => setTab('all')}>
+            <TabsTrigger
+              value="all"
+              disabled={isTodoListEmpty}
+              onClick={() => setTab('all')}
+            >
               {t('allTab')}
             </TabsTrigger>
-            <TabsTrigger value="active" onClick={() => setTab('active')}>
+            <TabsTrigger
+              value="active"
+              disabled={isTodoListEmpty}
+              onClick={() => setTab('active')}
+            >
               {t('activeTab')}
             </TabsTrigger>
-            <TabsTrigger value="completed" onClick={() => setTab('completed')}>
+            <TabsTrigger
+              value="completed"
+              disabled={isTodoListEmpty}
+              onClick={() => setTab('completed')}
+            >
               {t('completedTab')}
             </TabsTrigger>
           </TabsList>
