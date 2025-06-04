@@ -1,15 +1,15 @@
 import { useTodoStore, type Todo } from '@/store/todo-store';
 import { EmptyTodoList, TodoCard } from '@/ui/todos';
+import { memo } from 'react';
 
 interface TodoListProps {
   todos: Todo[];
   onEdit: (id: string) => void;
 }
 
-function TodoList({ todos, onEdit }: TodoListProps) {
+function TodoListComponent({ todos, onEdit }: TodoListProps) {
   const onDelete = useTodoStore((state) => state.delete);
   const onChangeState = useTodoStore((state) => state.changeStatus);
-
   if (todos.length === 0) {
     return <EmptyTodoList />;
   }
@@ -31,5 +31,7 @@ function TodoList({ todos, onEdit }: TodoListProps) {
     </div>
   );
 }
+
+const TodoList = memo(TodoListComponent);
 
 export { TodoList };

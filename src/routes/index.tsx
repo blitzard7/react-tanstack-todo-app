@@ -3,7 +3,7 @@ import { type TabValue, getTodosByTab } from '@/lib/todo-filter';
 import { useTodoStore } from '@/store/todo-store';
 import { ButtonLink, Header, SearchBar, TodoList } from '@/ui';
 import { createFileRoute } from '@tanstack/react-router';
-import { useMemo, useState, type ChangeEvent } from 'react';
+import { useCallback, useMemo, useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/')({
@@ -12,18 +12,21 @@ export const Route = createFileRoute('/')({
 
 function App() {
   const { t } = useTranslation();
-  const navigate = Route.useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [tab, setTab] = useState<TabValue>('all');
+  const navigate = Route.useNavigate();
   const todos = useTodoStore((state) => state.todos);
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const onEdit = (todoId: string) => {
-    navigate({ to: '/todos/$todoId/edit', params: { todoId } });
-  };
+  const onEdit = useCallback(
+    (todoId: string) => {
+      navigate({ to: '/todos/$todoId/edit', params: { todoId } });
+    },
+    [navigate],
+  );
 
   const lowerSearchQuery = searchQuery.toLowerCase();
   const filteredTodos = useMemo(() => {
