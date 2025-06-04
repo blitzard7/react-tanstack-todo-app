@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { type TabValue, getTodosByTab } from '@/lib/todo-filter';
 import { useTodoStore } from '@/store/todo-store';
 import { ButtonLink, Header, SearchBar, TodoList } from '@/ui';
 import { createFileRoute } from '@tanstack/react-router';
@@ -10,12 +11,11 @@ export const Route = createFileRoute('/')({
 });
 
 function App() {
+  const { t } = useTranslation();
   const navigate = Route.useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+  const [tab, setTab] = useState<TabValue>('all');
   const todos = useTodoStore((state) => state.todos);
-  const deleteTodos = useTodoStore((state) => state.delete);
-
-  const { t } = useTranslation();
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -27,12 +27,13 @@ function App() {
 
   const lowerSearchQuery = searchQuery.toLowerCase();
   const filteredTodos = useMemo(() => {
-    return todos.filter(
+    const matchingTodos = todos.filter(
       (todo) =>
         todo.title.toLowerCase().includes(lowerSearchQuery) ||
         todo.description?.toLowerCase().includes(lowerSearchQuery),
     );
-  }, [todos, lowerSearchQuery]);
+    return getTodosByTab(matchingTodos, tab);
+  }, [todos, lowerSearchQuery, tab]);
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16 space-y-8">
@@ -64,40 +65,18 @@ function App() {
         </div>
         <Tabs defaultValue="all" className="mt-4">
           <TabsList className="grid grid-cols-3 w-full max-w-md">
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger
-              value="active"
-              onClick={() => filteredTodos.filter((todo) => !todo.completed)}
-            >
-              Active
+            <TabsTrigger value="all" onClick={() => setTab('all')}>
+              {t('allTab')}
             </TabsTrigger>
-            <TabsTrigger
-              value="completed"
-              onClick={() => filteredTodos.filter((todo) => todo.completed)}
-            >
-              Completed
+            <TabsTrigger value="active" onClick={() => setTab('active')}>
+              {t('activeTab')}
+            </TabsTrigger>
+            <TabsTrigger value="completed" onClick={() => setTab('completed')}>
+              {t('completedTab')}
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="all">
-            <TodoList
-              todos={filteredTodos}
-              onDelete={deleteTodos}
-              onEdit={onEdit}
-            />
-          </TabsContent>
-          <TabsContent value="active">
-            <TodoList
-              todos={filteredTodos.filter((todo) => !todo.completed)}
-              onDelete={deleteTodos}
-              onEdit={onEdit}
-            />
-          </TabsContent>
-          <TabsContent value="completed">
-            <TodoList
-              todos={filteredTodos.filter((todo) => todo.completed)}
-              onDelete={deleteTodos}
-              onEdit={onEdit}
-            />
+          <TabsContent value={tab}>
+            <TodoList todos={filteredTodos} onEdit={onEdit} />
           </TabsContent>
         </Tabs>
       </div>

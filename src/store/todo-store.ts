@@ -17,6 +17,7 @@ type TodoAction = {
   add: (todo: Omit<Todo, 'id'>) => void;
   delete: (id: string) => void;
   update: (id: string, updatedTodo: Omit<Todo, 'id'>) => void;
+  changeStatus: (id: string, isCompleted: boolean) => void;
 };
 
 const useTodoStore = create<TodoState & TodoAction>((set) => ({
@@ -39,6 +40,12 @@ const useTodoStore = create<TodoState & TodoAction>((set) => ({
     set((state: TodoState) => ({
       todos: state.todos.map((todo) =>
         todo.id === id ? { ...updatedTodo, id } : todo,
+      ),
+    })),
+  changeStatus: (id: string, isCompleted: boolean) =>
+    set((state: TodoState) => ({
+      todos: state.todos.map((todo) =>
+        todo.id === id ? { ...todo, id, completed: isCompleted } : todo,
       ),
     })),
 }));
