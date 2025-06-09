@@ -7,7 +7,7 @@ const todoSchema = z.object({
     .min(4, { message: 'At least 4 characters are needed' }),
   description: z.string().nonempty({ message: 'This is required' }),
   deadline: z
-    .union([z.string().nonempty(), z.literal('')])
+    .union([z.string().nonempty(), z.literal(''), z.date()])
     .transform((val) => (val === '' ? undefined : new Date(val)))
     .optional()
     .refine(
