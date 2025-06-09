@@ -25,7 +25,7 @@ function CreateNewTodo() {
     defaultValues: {
       title: '',
       description: '',
-      deadline: new Date(),
+      deadline: undefined,
       priority: 'low',
     },
   });
@@ -139,6 +139,7 @@ function CreateNewTodo() {
                 min={new Date().toISOString().split('T')[0]}
                 className="w-full rounded-lg border border-gray-200 py-2.5 pl-3 pr-3 text-gray-700 placeholder:text-gray-400 focus:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-100"
               />
+              <p className="text-red-500">{errors.deadline?.message}</p>
             </div>
             <div className="space-y-2">
               <label

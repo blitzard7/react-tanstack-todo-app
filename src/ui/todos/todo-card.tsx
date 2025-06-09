@@ -60,11 +60,17 @@ function TodoCard({ todo, onDelete, onEdit, onChangeState }: TodoCardProp) {
               </svg>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => onChangeState(todo.id, true)}>
+              <DropdownMenuItem
+                hidden={todo.completed}
+                onClick={() => onChangeState(todo.id, true)}
+              >
                 <CheckIcon className="h-4 w-4 mr-2" />
                 <span>{t('done')}</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onEdit(todo.id)}>
+              <DropdownMenuItem
+                hidden={todo.completed}
+                onClick={() => onEdit(todo.id)}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4 mr-2"
@@ -112,14 +118,14 @@ function TodoCard({ todo, onDelete, onEdit, onChangeState }: TodoCardProp) {
       </p>
 
       <div className="flex justify-between items-center">
-        <div className="flex items-center text-sm text-gray-500 space-x-0.5">
-          <ClockIcon />
-          {todo.deadline ? (
+        {todo.deadline && (
+          <div className="flex items-center text-sm text-gray-500 space-x-0.5">
+            <ClockIcon />
             <span>{new Date(todo.deadline).toISOString().split('T')[0]}</span>
-          ) : null}
-        </div>
+          </div>
+        )}
 
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 ml-auto">
           <Badge>
             <span className="ml-1 capitalize">
               {todo.completed ? t('completedTab') : t('activeTab')}
