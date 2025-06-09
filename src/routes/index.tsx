@@ -71,7 +71,7 @@ function App() {
           </div>
         </div>
         <Tabs defaultValue="all" className="mt-4">
-          <TabsList className="grid grid-cols-3 w-full max-w-md">
+          <TabsList className="grid grid-cols-3 w-full md:w-96">
             <TabsTrigger
               value="all"
               disabled={isTodoListEmpty}
