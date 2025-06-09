@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { CheckIcon, ClockIcon, PriorityIcon } from '../icons';
+import { cn } from '@/lib/utils';
 
 interface TodoCardProp {
   todo: Todo;
@@ -24,10 +25,27 @@ function TodoCard({ todo, onDelete, onEdit, onChangeState }: TodoCardProp) {
     medium: 'bg-yellow-100 text-yellow-800',
     low: 'bg-green-100 text-green-800',
   };
+
   return (
-    <div className="bg-white shadow-md p-5 border border-gray-200 rounded-lg space-y-2 hover:shadow-lg transition-shadow duration-300">
+    <div
+      className={cn(
+        'shadow-md p-5 borde rounded-lg space-y-2 hover:shadow-lg transition-shadow duration-300',
+        todo.completed
+          ? 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700'
+          : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700',
+      )}
+    >
       <div className="flex justify-between items-start">
-        <span className="truncate text-lg font-bold">{todo.title}</span>
+        <h3
+          className={cn(
+            'truncate text-lg font-medium',
+            todo.completed
+              ? 'text-gray-500 dark:text-gray-400 line-through'
+              : 'text-gray-900 dark:text-white',
+          )}
+        >
+          {todo.title}
+        </h3>
         <div className="flex items-center">
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer">
@@ -82,7 +100,16 @@ function TodoCard({ todo, onDelete, onEdit, onChangeState }: TodoCardProp) {
         </div>
       </div>
 
-      <p className="text-gray-600 mb-4 line-clamp-2">{todo.description}</p>
+      <p
+        className={cn(
+          'mb-4 line-clamp-2',
+          todo.completed
+            ? 'text-gray-400 dark:text-gray-500'
+            : 'text-gray-600 dark:text-gray-300',
+        )}
+      >
+        {todo.description}
+      </p>
 
       <div className="flex justify-between items-center">
         <div className="flex items-center text-sm text-gray-500 space-x-0.5">
@@ -92,10 +119,18 @@ function TodoCard({ todo, onDelete, onEdit, onChangeState }: TodoCardProp) {
           ) : null}
         </div>
 
-        <Badge className={`${colorClasses[todo.priority]}`}>
-          <PriorityIcon priority={todo.priority} />
-          <span className="ml-1 capitalize">{todo.priority}</span>
-        </Badge>
+        <div className="flex space-x-2">
+          <Badge>
+            <span className="ml-1 capitalize">
+              {todo.completed ? t('completedTab') : t('activeTab')}
+            </span>
+          </Badge>
+
+          <Badge className={`${colorClasses[todo.priority]}`}>
+            <PriorityIcon priority={todo.priority} />
+            <span className="ml-1 capitalize">{todo.priority}</span>
+          </Badge>
+        </div>
       </div>
     </div>
   );
