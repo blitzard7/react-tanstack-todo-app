@@ -51,6 +51,7 @@ function EditTodo() {
             title: data.title,
             deadline: data.deadline,
             description: data.description,
+            category: data.category,
             completed: false,
           });
           reset();
