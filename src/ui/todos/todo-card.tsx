@@ -47,6 +47,10 @@ function TodoCard({ todo, onDelete, onEdit, onChangeState }: TodoCardProp) {
           {todo.title}
         </h3>
         <div className="flex items-center">
+          <Badge className={`${colorClasses[todo.priority]}`}>
+            <PriorityIcon priority={todo.priority} />
+            <span className="ml-1 capitalize">{todo.priority}</span>
+          </Badge>
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer">
               <svg
@@ -132,9 +136,8 @@ function TodoCard({ todo, onDelete, onEdit, onChangeState }: TodoCardProp) {
             </span>
           </Badge>
 
-          <Badge className={`${colorClasses[todo.priority]}`}>
-            <PriorityIcon priority={todo.priority} />
-            <span className="ml-1 capitalize">{todo.priority}</span>
+          <Badge className="bg-violet-100 text-violet-800">
+            <span className="ml-1 capitalize">{todo.category}</span>
           </Badge>
         </div>
       </div>

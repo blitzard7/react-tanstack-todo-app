@@ -1,5 +1,9 @@
 import { todoSchema } from '@/lib/todo.schema';
-import { useTodoStore } from '@/store/todo-store';
+import {
+  categoryLabels,
+  useTodoStore,
+  type Category,
+} from '@/store/todo-store';
 import { ButtonLink, Header } from '@/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute } from '@tanstack/react-router';
@@ -27,6 +31,7 @@ function CreateNewTodo() {
       description: '',
       deadline: undefined,
       priority: 'low',
+      category: 'personal',
     },
   });
 
@@ -47,6 +52,7 @@ function CreateNewTodo() {
             deadline: data.deadline,
             priority: data.priority,
             completed: false,
+            category: data.category,
           });
           reset();
           navigate({ to: '/' });
@@ -122,6 +128,22 @@ function CreateNewTodo() {
                 placeholder={t('todoDescriptionPlaceholder')}
               />
               <p className="text-red-500">{errors.description?.message}</p>
+            </div>
+          </div>
+          <div>
+            <div className="relative flex items-center">
+              <select
+                id="category"
+                {...register('category')}
+                defaultValue="Low"
+                className="w-full appearance-none rounded-lg border border-gray-200 bg-white py-2.5 pl-3 pr-8 text-gray-700 focus:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-100"
+              >
+                {(Object.keys(categoryLabels) as Category[]).map((key) => (
+                  <option key={key} value={key}>
+                    {t(`category.${key}`)}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

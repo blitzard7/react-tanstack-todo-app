@@ -20,6 +20,7 @@ const todoSchema = z.object({
       { message: 'Deadline cannot be in the past' },
     ),
   priority: z.string().nonempty(),
+  category: z.string().nonempty(),
 });
 
 export { todoSchema };

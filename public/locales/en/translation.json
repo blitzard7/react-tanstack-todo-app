@@ -25,5 +25,14 @@
   "noTodosFound": "There are no todos",
   "goBackHome": "Go Home",
   "pageNotFoundTitle": "Page Not Found",
-  "pageNotFoundSubtitle": "Sorry, we couldn't find the page you're looking for."
+  "pageNotFoundSubtitle": "Sorry, we couldn't find the page you're looking for.",
+  "category": {
+    "personal": "Personal",
+    "work": "Work",
+    "research": "Research",
+    "education": "Education",
+    "finance": "Finance",
+    "health": "Health",
+    "other": "Other"
+  }
 }

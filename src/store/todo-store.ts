@@ -1,9 +1,24 @@
 import { create } from 'zustand';
 
+type Priority = 'high' | 'medium' | 'low';
+
+const categoryLabels = {
+  personal: 'Personal',
+  work: 'Work',
+  research: 'Research',
+  education: 'Education',
+  finance: 'Finance',
+  health: 'Health',
+  other: 'Other',
+} as const;
+
+type Category = keyof typeof categoryLabels;
+
 type Todo = {
-  id: string;
+  readonly id: string;
   title: string;
-  priority: 'high' | 'medium' | 'low';
+  priority: Priority;
+  category: Category;
   completed: boolean;
   description?: string;
   deadline?: Date;
@@ -52,4 +67,4 @@ const useTodoStore = create<TodoState & TodoAction>((set) => ({
 
 const todoStore = useTodoStore;
 
-export { useTodoStore, todoStore, type Todo };
+export { useTodoStore, todoStore, categoryLabels, type Todo, type Category };

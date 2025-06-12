@@ -25,5 +25,14 @@
   "noTodosFound": "Es gibt keine Todos",
   "goBackHome": "Zur Startseite",
   "pageNotFoundTitle": "Seite nicht gefunden",
-  "pageNotFoundSubtitle": "Leider konnten wir die von Ihnen gesuchte Seite nicht finden."
+  "pageNotFoundSubtitle": "Leider konnten wir die von Ihnen gesuchte Seite nicht finden.",
+  "category": {
+    "personal": "Persönlich",
+    "work": "Arbeit",
+    "research": "Recherche",
+    "education": "Bildung",
+    "finance": "Finanzen",
+    "health": "Gesundheit",
+    "other": "Sonstige"
+  }
 }
