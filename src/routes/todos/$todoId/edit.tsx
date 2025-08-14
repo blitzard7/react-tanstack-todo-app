@@ -38,6 +38,7 @@ function EditTodo() {
       description: toEditTodo?.description,
       deadline: toEditTodo?.deadline,
       priority: toEditTodo?.priority,
+      category: toEditTodo?.category || 'general',
     },
   });
 
@@ -191,7 +192,7 @@ function EditTodo() {
             </ButtonLink>
 
             <button className="flex-1 rounded-lg py-2.5 px-4 font-medium transition-all duration-300 flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 text-white">
-              {t('add')}
+              {t('edit')}
             </button>
           </div>
         </div>
